@@ -7,19 +7,25 @@
 </head>
 <body>
     <?php
-            echo"sorting array"."<br>";
-            
-            $name=array("kavya","drashti","komal","krisha","priya"," riya");
-            
-            foreach($name as $ele){
-                echo $ele."<br>";
-            }
-            echo "<br>"."after sorting"."<br>";
-
-            sort($name);
-            foreach($name as $ele1){
-                echo $ele1 . "<br>";
-            }
-    ?>
+        try
+        {
+            $conn = new PDO("mysql:host=localhost:3307;dbname=studentdb","root","");
+            $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $sql ="CREATE TABLE IF NOT EXISTS students4
+            (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(50),
+                email VARCHAR(50),
+                city VARCHAR(30)
+            )";
+            $conn->exec($sql);
+            echo"Table Created Successfully.";
+        }
+        catch(PDOException $e)
+        {
+            echo"Connection Failed: " . $e->getMessage();
+        }
+        $conn = null;
+    ?>+
 </body>
 </html>
